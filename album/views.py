@@ -310,7 +310,7 @@ def yolo(img_buffer):
         scores = detection[5:]
         class_id = np.argmax(scores)
         confidence = scores[class_id]
-        if confidence > 0.5:
+        if confidence > 0.3:
       # Object detected
             center_x = int(detection[0] * width)
             center_y = int(detection[1] * height)
@@ -338,14 +338,19 @@ def yolo(img_buffer):
         #color = colors[class_ids[i]]
         #cv2.rectangle(img, (x, y), (x + w, y + h), color, 2)
         #cv2.putText(img, label, (x, y + 30), font, 3, color, 3)
+        
+        tag = []
+        for i in range(len(boxes)):
+           tag.append(classes[class_ids[i]])
 
+        tag = set(tag)
     #cv2.imshow("Image", img)
     #cv2.waitKey(0)
     #cv2.destroyAllWindows()
 
-    print('태그: '+str(labels))
+    print('태그: '+str(tag))
 
-  return labels
+  return tag
 
 @login_required(login_url='login')
 def add_tag(request):
@@ -419,7 +424,7 @@ def detect_tag(request):
               scores = detection[5:]
               class_id = np.argmax(scores)
               confidence = scores[class_id]
-              if confidence > 0.5:
+              if confidence > 0.3:
             # Object detected
                   center_x = int(detection[0] * width)
                   center_y = int(detection[1] * height)
