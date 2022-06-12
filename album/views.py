@@ -445,7 +445,7 @@ def yolo(img_buffer):
             scores = detection[5:]
             class_id = np.argmax(scores)
             confidence = scores[class_id]
-            if confidence > 0.5:
+            if confidence > 0.3:
                 # Object detected
                 center_x = int(detection[0] * width)
                 center_y = int(detection[1] * height)
@@ -473,12 +473,18 @@ def yolo(img_buffer):
                 # color = colors[class_ids[i]]
                 # cv2.rectangle(img, (x, y), (x + w, y + h), color, 2)
                 # cv2.putText(img, label, (x, y + 30), font, 3, color, 3)
-
+                
+                tag = []
+                for i in range(len(boxes)):
+                  tag.append(classes[class_ids[i]])
+                  
+                tag = set(tag)
+                
         # cv2.imshow("Image", img)
         # cv2.waitKey(0)
         # cv2.destroyAllWindows()
 
-        print('태그: ' + str(labels))
+        print('태그: ' + str(tag))
 
     return labels
 
@@ -723,12 +729,36 @@ def analysis(request):
             else:
                 content = {
                     'rank1_tagname': 'NO PHOTO',  # 태그명
+                    # 'rank2_tagname': 0,
+                    # 'rank3_tagname': 0,
+                    # 'rank1_tagfreq': 0,  # 태그 빈도
+                    # 'rank2_tagfreq': 0,
+                    # 'rank3_tagfreq': 0,
+                    # 'related_tagname1_1': 0,  # 연관 태그명
+                    # 'related_tagname1_2': 0,
+                    # 'related_tagname2_1': 0,
+                    # 'related_tagname2_2': 0,
+                    # 'related_tagname3_1': 0,
+                    # 'related_tagname3_2': 0,
+                    # 'photourl': 0
                 }
 
         else:
             # pass #리턴할 값이 없으면 오류가 나므로 리턴값을 넣어주세요(현재는 페이지만 띄워줘서 pass했습니다)
             content = {
                 'rank1_tagname': 'NO PHOTO',  # 태그명
+                # 'rank2_tagname': 0,
+                # 'rank3_tagname': 0,
+                # 'rank1_tagfreq': 0,  # 태그 빈도
+                # 'rank2_tagfreq': 0,
+                # 'rank3_tagfreq': 0,
+                # 'related_tagname1_1': 0,  # 연관 태그명
+                # 'related_tagname1_2': 0,
+                # 'related_tagname2_1': 0,
+                # 'related_tagname2_2': 0,
+                # 'related_tagname3_1': 0,
+                # 'related_tagname3_2': 0,
+                # 'photourl': 0
             }
         
         
@@ -863,12 +893,36 @@ def analysis(request):
         else:
             content = {
                 'rank1_tagname': '사진이 없습니다',  # 태그명
+                # 'rank2_tagname': 0,
+                # 'rank3_tagname': 0,
+                # 'rank1_tagfreq': 0,  # 태그 빈도
+                # 'rank2_tagfreq': 0,
+                # 'rank3_tagfreq': 0,
+                # 'related_tagname1_1': 0,  # 연관 태그명
+                # 'related_tagname1_2': 0,
+                # 'related_tagname2_1': 0,
+                # 'related_tagname2_2': 0,
+                # 'related_tagname3_1': 0,
+                # 'related_tagname3_2': 0,
+                # 'photourl': 0
             }
 
     else:
         # pass #리턴할 값이 없으면 오류가 나므로 리턴값을 넣어주세요(현재는 페이지만 띄워줘서 pass했습니다)
         content = {
             'rank1_tagname': '사진이 없습니다',  # 태그명
+            # 'rank2_tagname': 0,
+            # 'rank3_tagname': 0,
+            # 'rank1_tagfreq': 0,  # 태그 빈도
+            # 'rank2_tagfreq': 0,
+            # 'rank3_tagfreq': 0,
+            # 'related_tagname1_1': 0,  # 연관 태그명
+            # 'related_tagname1_2': 0,
+            # 'related_tagname2_1': 0,
+            # 'related_tagname2_2': 0,
+            # 'related_tagname3_1': 0,
+            # 'related_tagname3_2': 0,
+            # 'photourl': 0
         }
 
 
